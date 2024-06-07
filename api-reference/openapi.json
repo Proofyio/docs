@@ -1,10 +1,11 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.3",
   "info": {
     "title": "Proofy Api",
     "description": "Some text",
-    "license": {
-      "name": "MIT"
+    "termsOfService": "https://proofy.io/terms",
+    "contact": {
+      "email": "support@proofy.io"
     },
     "version": "1.0.0"
   },
@@ -18,16 +19,36 @@
       "ApiKeyAuth": []
     }
   ],
+  "tags": [
+    {
+      "name": "Widget",
+      "description": "Everything about JS Widget"
+    },
+    {
+      "name": "Job",
+      "description": "Everything about Jobs"
+    },
+    {
+      "name": "Single Email",
+      "description": "Single email check"
+    },
+    {
+      "name": "Batch Emails",
+      "description": "Batch emails check"
+    }
+  ],
   "paths": {
     "/check/single": {
       "get": {
+        "tags": [
+          "Single Email"
+        ],
         "description": "Check a single email address",
         "parameters": [
           {
             "name": "email",
             "in": "query",
-            "description": "Email",
-            "required": true     
+            "required": true
           }
         ],
         "responses": {
@@ -36,83 +57,46 @@
             "content": {
               "application/json": {
                 "schema": {
-                   "$ref":"#/components/schemas/SingleCheckResponse"
-                   }
+                  "$ref": "#/components/schemas/SingleCheckResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           }
+        }
       }
     },
     "/check/batch": {
       "post": {
-        "tags": "Batch Emails",
+        "tags": [
+          "Batch Emails"
+        ],
         "description": "Check a batch email address",
         "requestBody": {
-          "description": "",
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/BatchRequest"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -126,77 +110,40 @@
             }
           },
           "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           }
         }
       }
     },
     "/check/job/create": {
       "post": {
+        "tags": [
+          "Job"
+        ],
         "description": "Create validation job",
-        "tags": "Job",
         "requestBody": {
-          "description": "",
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/JobCreateRequest"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -210,53 +157,30 @@
             }
           },
           "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           }
         }
       }
     },
     "/check/job/status": {
       "get": {
-        "tags": "Job",
+        "tags": [
+          "Job"
+        ],
         "description": "Check validation job status",
         "parameters": [
           {
             "name": "job_id",
             "in": "query",
-            "description": "ID of job to download",
             "required": true
           }
         ],
@@ -272,53 +196,30 @@
             }
           },
           "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           }
         }
       }
     },
     "/check/job/download": {
       "get": {
-        "tags": "Job",
+        "tags": [
+          "Job"
+        ],
         "description": "Download validation job result",
         "parameters": [
           {
             "name": "job_id",
             "in": "query",
-            "description": "ID of job to download",
             "required": true
           }
         ],
@@ -334,40 +235,16 @@
             }
           },
           "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           },
           "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/responses/HttpErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/HttpErrorResponse"
           }
         }
       }
@@ -376,15 +253,12 @@
   "components": {
     "schemas": {
       "JobCreateRequest": {
-        "required": [],
         "type": "object",
         "properties": {
           "file_url": {
-            "description": "",
             "type": "string"
           },
           "file_name": {
-            "description": "",
             "type": "string"
           }
         }
@@ -393,11 +267,9 @@
         "type": "object",
         "properties": {
           "status": {
-            "description": "",
             "type": "string"
           },
           "job_id": {
-            "description": "",
             "type": "string"
           }
         }
@@ -406,31 +278,24 @@
         "type": "object",
         "properties": {
           "status": {
-            "description": "",
             "type": "string"
           },
           "total": {
-            "description": "",
             "type": "object",
             "properties": {
               "records": {
-                "description": "",
                 "type": "number"
               },
               "bad_syntax": {
-                "description": "",
                 "type": "number"
               },
               "duplicates": {
-                "description": "",
                 "type": "number"
               },
               "billable": {
-                "description": "",
                 "type": "number"
               },
               "processed": {
-                "description": "",
                 "type": "number"
               }
             }
@@ -441,11 +306,9 @@
         "type": "object",
         "properties": {
           "status": {
-            "description": "",
             "type": "string"
           },
           "url": {
-            "description": "",
             "type": "string"
           }
         }
@@ -454,27 +317,21 @@
         "type": "object",
         "properties": {
           "result": {
-            "description": "",
             "type": "object",
             "properties": {
               "syntax": {
-                "description": "",
                 "type": "object"
               },
               "free": {
-                "description": "",
                 "type": "boolean"
               },
               "roleAccount": {
-                "description": "",
                 "type": "boolean"
               },
               "disposable": {
-                "description": "",
                 "type": "boolean"
               },
               "mx": {
-                "description": "",
                 "type": "object",
                 "properties": {
                   "records": {
@@ -510,20 +367,18 @@
               },
               "reachable": {
                 "type": "string"
-              },
-              "credits": {
-                "type": "number"
               }
             }
+          },
+          "credits": {
+            "type": "number"
           }
         }
       },
       "BatchRequest": {
-        "required": [],
         "type": "object",
         "properties": {
           "emails": {
-            "description": "",
             "type": "array",
             "items": {
               "type": "string"
@@ -532,75 +387,53 @@
         }
       },
       "BatchResponse": {
-        "required": [],
-        "type": "object",
         "properties": {
           "status": {
-            "description": "",
             "type": "string"
           },
           "job_id": {
-            "description": "",
             "type": "string"
           }
         }
       },
       "UnauthorizedResponse": {
-        "required": [],
-        "type": "object",
         "properties": {
           "message": {
-            "description": "",
             "type": "string"
           }
         }
       },
       "BadRequestResponse": {
-        "required": [],
-        "type": "object",
         "properties": {
           "message": {
-            "description": "",
             "type": "string"
           }
         }
       },
       "RateLimitErrorResponse": {
-        "required": [],
-        "type": "object",
         "properties": {
           "message": {
-            "description": "",
             "type": "string"
           }
         }
       },
       "ValidationErrorResponse": {
-        "required": [],
-        "type": "object",
         "properties": {
           "message": {
-            "description": "",
             "type": "string"
           }
         }
       },
       "InternalServerErrorResponse": {
-        "required": [],
-        "type": "object",
         "properties": {
           "message": {
-            "description": "",
             "type": "string"
           }
         }
       },
       "NotFoundResponse": {
-        "required": [],
-        "type": "object",
         "properties": {
           "message": {
-            "description": "",
             "type": "string"
           }
         }
