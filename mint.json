@@ -77,7 +77,6 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/create",
         "api-reference/endpoint/check-single",
         "api-reference/endpoint/check-batch",
         "api-reference/endpoint/check-job-create"
