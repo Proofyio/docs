@@ -1,6 +1,3 @@
-Конвертирую YAML в JSON в соответствии со спецификацией OpenAPI:
-
-```json
 {
   "openapi": "3.0.3",
   "info": {
@@ -284,3 +281,203 @@
           "job_id": {
             "type": "string"
           }
+        }
+      },
+      "JobStatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "total": {
+            "type": "object",
+            "properties": {
+              "records": {
+                "type": "number"
+              },
+              "bad_syntax": {
+                "type": "number"
+              },
+              "duplicates": {
+                "type": "number"
+              },
+              "billable": {
+                "type": "number"
+              },
+              "processed": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "JobDownloadResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "SingleCheckResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "object",
+            "properties": {
+              "syntax": {
+                "type": "object"
+              },
+              "free": {
+                "type": "boolean"
+              },
+              "roleAccount": {
+                "type": "boolean"
+              },
+              "disposable": {
+                "type": "boolean"
+              },
+              "mx": {
+                "type": "object",
+                "properties": {
+                  "records": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "acceptsMail": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "deliverability": {
+                "type": "object",
+                "properties": {
+                  "canConnect": {
+                    "type": "boolean"
+                  },
+                  "fullInbox": {
+                    "type": "boolean"
+                  },
+                  "catchAll": {
+                    "type": "boolean"
+                  },
+                  "deliverable": {
+                    "type": "boolean"
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "reachable": {
+                "type": "string"
+              }
+            }
+          },
+          "credits": {
+            "type": "number"
+          }
+        }
+      },
+      "BatchRequest": {
+        "type": "object",
+        "properties": {
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "BatchResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "job_id": {
+            "type": "string"
+          }
+        }
+      },
+      "UnauthorizedResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "BadRequestResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "RateLimitErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidationErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "InternalServerErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "NotFoundResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "HttpErrorResponse": {
+        "description": "Http Error Response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "api_key"
+      }
+    }
+  }
+}
