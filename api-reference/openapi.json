@@ -151,7 +151,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/JobCreateResponse"
+                  "$ref": "#/components/schemas/JobStatusResponse"
                 }
               }
             }
@@ -190,7 +190,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/JobStatusResponse"
+                  "$ref": "#/components/schemas/JobCreateResponse"
                 }
               }
             }
