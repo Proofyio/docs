@@ -53,6 +53,12 @@
       ]
     },
     {
+      "group": "Credits",
+      "pages": [
+        "api-reference/endpoint/credits"
+      ]
+    },
+    {
       "group": "Real Time",
       "pages": [
         "api-reference/endpoint/check-single"
@@ -61,9 +67,18 @@
     {
       "group": "Batch",
       "pages": [
-      
-        "api-reference/endpoint/check-batch",
-        "api-reference/endpoint/check-job-create",
+        "api-reference/endpoint/check-batch"
+      ]
+    },
+    {
+      "group": "Bulk",
+      "pages": [
+        "api-reference/endpoint/check-job-create"
+      ]
+    },
+    {
+      "group": "Result",
+      "pages": [
         "api-reference/endpoint/check-job-status",
         "api-reference/endpoint/check-job-download"
       ]
