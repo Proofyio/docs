@@ -79,7 +79,9 @@
       "pages": [
         "api-reference/endpoint/check-single",
         "api-reference/endpoint/check-batch",
-        "api-reference/endpoint/check-job-create"
+        "api-reference/endpoint/check-job-create",
+        "api-reference/endpoint/check-job-status",
+        "api-reference/endpoint/check-job-download"
       ]
     }
   ],
