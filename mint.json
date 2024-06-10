@@ -17,13 +17,13 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "name": "Log in",
+      "url": "https://verifier-dev.famb.io/"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Sign Up",
+    "url": "https://verifier-dev.famb.io/signup"
   },
   "tabs": [
     {
@@ -31,23 +31,7 @@
       "url": "api-reference"
     }
   ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
-    }
-  ],
+  "anchors": [],
   "navigation": [
     {
       "group": "Get Started",
@@ -69,15 +53,15 @@
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "Real Time",
       "pages": [
-        "api-reference/introduction"
+        "api-reference/endpoint/check-single"
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Batch",
       "pages": [
-        "api-reference/endpoint/check-single",
+      
         "api-reference/endpoint/check-batch",
         "api-reference/endpoint/check-job-create",
         "api-reference/endpoint/check-job-status",
