@@ -38,12 +38,12 @@
     }
   ],
   "paths": {
-    "/check/single": {
+    "/verify/single": {
       "get": {
         "tags": [
           "Single Email"
         ],
-        "description": "Check a single email address",
+        "description": "Verify a single email address",
         "parameters": [
           {
             "name": "email",
@@ -86,12 +86,12 @@
         }
       }
     },
-    "/check/batch": {
+    "/verify/batch/create": {
       "post": {
         "tags": [
           "Batch Emails"
         ],
-        "description": "Check a batch email address",
+        "description": "Verify a batch email address",
         "requestBody": {
           "content": {
             "application/json": {
@@ -133,12 +133,125 @@
         }
       }
     },
-    "/check/job/create": {
+    "/verify/batch/status": {
+      "post": {
+        "tags": [
+          "Batch Emails"
+        ],
+        "description": "Check the status of your request",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "429": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          }
+        }
+      }
+    },
+    "/verify/batch/download": {
+      "post": {
+        "tags": [
+          "Batch Emails"
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "download",
+            "in": "query",
+            "required": false,
+            "description": "download emails by status, possible values: all, deliverable, risky, undeliverable, unknown",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Download the batch results as JSON",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "429": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          }
+        }
+      }
+    },
+    "/verify/file/create": {
       "post": {
         "tags": [
           "Job"
         ],
-        "description": "Create validation job",
+        "description": "Create validation file",
         "requestBody": {
           "content": {
             "application/json": {
@@ -174,12 +287,12 @@
         }
       }
     },
-    "/check/job/status": {
+    "/verify/file/status": {
       "get": {
         "tags": [
           "Job"
         ],
-        "description": "Check validation job status",
+        "description": "Check validation file status",
         "parameters": [
           {
             "name": "job_id",
@@ -216,17 +329,26 @@
         }
       }
     },
-    "/check/job/download": {
+    "/verify/file/download": {
       "get": {
         "tags": [
           "Job"
         ],
-        "description": "Download validation job result",
+        "description": "Download validation file result",
         "parameters": [
           {
             "name": "job_id",
             "in": "query",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "download",
+            "in": "query",
+            "required": false,
+            "description": "download file with emails by status, possible values: all, deliverable, risky, undeliverable, unknown",
             "schema": {
               "type": "string"
             }

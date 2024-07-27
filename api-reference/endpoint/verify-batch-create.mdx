@@ -1,6 +1,7 @@
 ---
 title: 'Create butch request'
-openapi: 'POST /check/batch'
+description: 'Verifies one or multiple emails in a batch'
+openapi: 'POST verify/batch/create'
 ---
 
 If you need to verify multiple email addresses at once, you can use our Batch Email Verification API.
@@ -10,3 +11,9 @@ Proofy's distributed infrastructure ensures optimal results and will retry any v
 Submit an array of email addresses, optionally including names.
 
 The response data will include the names provided, which can also be used to pass your internal ID.
+
+### Batch size recommendation
+
+Single batch can process up to 200 emails
+
+This method is recommended when verification quality is a priority, as it offers the highest accuracy in email validation and the fewest "unknown" results.

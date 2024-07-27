@@ -61,32 +61,25 @@
     {
       "group": "Real Time",
       "pages": [
-        "api-reference/endpoint/check-single"
+        "api-reference/endpoint/verify-single"
       ]
     },
     {
       "group": "Batch",
       "pages": [
-        "api-reference/endpoint/check-batch"
+        "api-reference/endpoint/verify-batch-create",
+        "api-reference/endpoint/verify-batch-status",
+        "api-reference/endpoint/verify-batch-download"
       ]
     },
     {
-      "group": "Bulk",
+      "group": "file",
       "pages": [
-        "api-reference/endpoint/check-job-create"
-      ]
-    },
-    {
-      "group": "Result",
-      "pages": [
-        "api-reference/endpoint/check-job-status",
-        "api-reference/endpoint/check-job-download"
+        "api-reference/endpoint/verify-file-create",
+        "api-reference/endpoint/verify-file-status",
+        "api-reference/endpoint/verify-file-download"
       ]
     }
   ],
-  "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
-  }
+  "footerSocials": {}
 }
