@@ -171,6 +171,53 @@
         }
       }
     },
+    "/verify/batch/cancel": {
+      "post": {
+        "tags": [
+          "Batch Emails"
+        ],
+        "description": "Cancel a request of batch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchCancelRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchCancelResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "429": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          }
+        }
+      }
+    },
     "/verify/batch/download": {
       "post": {
         "tags": [
@@ -303,6 +350,53 @@
             "$ref": "#/components/responses/HttpErrorResponse"
           },
           "404": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          }
+        }
+      }
+    },
+    "/verify/file/cancel": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Delete file",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobCancelRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobCancelResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/HttpErrorResponse"
+          },
+          "429": {
             "$ref": "#/components/responses/HttpErrorResponse"
           },
           "500": {
@@ -563,13 +657,37 @@
       "BatchResponse": {
         "type": "object",
         "properties": {
-          "status": {
-            "type": "string"
-          },
-          "job_id": {
-            "type": "string"
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
+      },
+      "BatchCancelRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "required": true,
+            "type": "boolean"
+          }
+        }
+      },
+      "BatchCancelResponse": {
+        "type": "object"
+      },
+      "JobCancelRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "required": true,
+            "type": "boolean"
+          }
+        }
+      },
+      "JobCancelResponse": {
+        "type": "object"
       },
       "UnauthorizedResponse": {
         "type": "object",

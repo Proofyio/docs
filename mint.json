@@ -69,6 +69,7 @@
       "pages": [
         "api-reference/endpoint/verify-batch-create",
         "api-reference/endpoint/verify-batch-status",
+        "api-reference/endpoint/verify-batch-cancel",
         "api-reference/endpoint/verify-batch-download"
       ]
     },
@@ -77,6 +78,7 @@
       "pages": [
         "api-reference/endpoint/verify-file-create",
         "api-reference/endpoint/verify-file-status",
+        "api-reference/endpoint/verify-batch-cancel",
         "api-reference/endpoint/verify-file-download"
       ]
     }
