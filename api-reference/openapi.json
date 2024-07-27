@@ -139,22 +139,13 @@
           "Batch Emails"
         ],
         "description": "Check the status of your request",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BatchRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Successful",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchResponse"
+                  "$ref": "#/components/schemas/BatchStatusResponse"
                 }
               }
             }
@@ -205,22 +196,13 @@
           }
         ],
         "description": "Download the batch results as JSON",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BatchRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Successful",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchResponse"
+                  "$ref": "#/components/schemas/BatchStatusResponse"
                 }
               }
             }
@@ -383,6 +365,67 @@
   },
   "components": {
     "schemas": {
+      "BatchCreateRequest": {
+        "type": "object",
+        "properties": {
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "BatchCreateResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "job_id": {
+            "type": "string"
+          }
+        }
+      },
+      "BatchStatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "total": {
+            "type": "object",
+            "properties": {
+              "records": {
+                "type": "number"
+              },
+              "bad_syntax": {
+                "type": "number"
+              },
+              "duplicates": {
+                "type": "number"
+              },
+              "billable": {
+                "type": "number"
+              },
+              "processed": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "BatchDownloadResponse": {
+        "type": "object",
+        "properties": {
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "JobCreateRequest": {
         "type": "object",
         "properties": {

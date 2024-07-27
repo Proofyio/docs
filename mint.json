@@ -73,7 +73,7 @@
       ]
     },
     {
-      "group": "file",
+      "group": "File",
       "pages": [
         "api-reference/endpoint/verify-file-create",
         "api-reference/endpoint/verify-file-status",
