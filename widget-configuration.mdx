@@ -1,5 +1,5 @@
 ---
-title: 'Widget'
+title: 'JS Widget'
 description: 'Documentation of JavaScript Widget'
 ---
 
@@ -10,10 +10,9 @@ To begin, create a new JavaScript widget on the apps page. Provide a name for ea
 
 ## Installing the Widget
 
-After creating the app, you'll receive your public API key along with an HTML snippet. To integrate the widget, simply paste the HTML snippet just before the closing </body> tag on your website:
+After creating the app, you'll receive your public API key along with an HTML snippet. To integrate the widget, simply paste the HTML snippet just before the closing `</body>` tag on your website:
 
-```
-html
+```markup index.html
 ...
 
     <script type="text/javascript">
@@ -21,23 +20,21 @@ html
             apiKey: 'public_000000...'
         };
     </script>
-    <script type="text/javascript" src="https://cdn.proofy.com/widget/dist/Proofy.js"></script>
+    <script type="text/javascript" src="https://cdn.proofy.io/widget/src/index.js"></script>
 </body>
 </html>
 ```
 
 
-Once the snippet is added to your site, the widget will automatically detect any input elements using the email type or named "email." For fields not using the email type, you can enforce detection by adding the data-nb attribute. All three fields below would be recognized by the widget:
+Once the snippet is added to your site, the widget will automatically detect any input elements using the `email` type or named `email`. For fields not using the email type, you can enforce detection by adding the `data-proofy` attribute. All three fields below would be recognized by the widget:
 
-```
-html
-Copy code
+```markup
 <input type="email" name="email_field" />
 <input type="text" name="email" />
 <input type="text" name="email_field" data-proofy />
 ```
 
-Now that your fields are set up, the Proofy JavaScript widget will automatically function when you start typing. By default, it blocks disposable and invalid submissions. Further adjustments can be made in the Settings section below.
+Now that your fields are set up, the `Proofy JavaScript Widget` will automatically function when you start typing. By default, it blocks disposable and invalid submissions. Further adjustments can be made in the Settings section below.
 
 
 ## Widget Settings
@@ -45,16 +42,16 @@ Now that your fields are set up, the Proofy JavaScript widget will automatically
 
 ### Authorized Domains
 
-Specifying authorized domains and IP addresses restricts unauthorized usage of your public API key. Requests utilizing your public API key are only accepted from these authorized sources.
+Specifying authorized domains and IP addresses restricts unauthorized usage of your `public API key`. Requests utilizing your public `API key` are only accepted from these authorized sources.
 
 Failure to specify authorized domains or IP addresses results in all requests being processed, irrespective of their origin.
 
 
 ### Throttling
 
-Setting throttling rules helps you stop users from misusing your forms. You can set different rules to control how many times someone can check things within a certain time, either for specific IP addresses or for everyone. If someone tries too many times, the widget will treat it as unknown, so it doesn't stop the process.
+Setting `throttling rules` helps you stop users from misusing your forms. You can set different rules to control how many times someone can check things within a certain time, either for `specific IP addresses` or for everyone. If someone tries too many times, the widget will treat it as unknown, so it doesn't stop the process.
 
-If you don't set up these rules, your forms might be misused. This could make your account run out of credits or even lead to your account being closed.
+If you don't set up these rules, your forms might be misused. This could make your account run out of credits or even lead to your `account being closed`.
 
 
 ### Advanced Widget Configuration
@@ -63,9 +60,11 @@ If you don't set up these rules, your forms might be misused. This could make yo
 Below is a code snippet for creating a feedback handler that will automatically associate itself with any field registered to the widget, whether added programmatically or automatically.
 
 
-JavaScript
+`JavaScript`
 
-```
+```javascript your-component.js
+    ...
+
     // Handle results (API call has succeeded)
     document.addEventListener("proofy:result", (e) => {
        if (e.detail.isValid) {
