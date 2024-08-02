@@ -91,7 +91,7 @@
         "tags": [
           "Batch Emails"
         ],
-        "description": "Verify a batch email address",
+        "description": "Verify a batch email addresses",
         "requestBody": {
           "content": {
             "application/json": {
@@ -134,11 +134,21 @@
       }
     },
     "/verify/batch/status": {
-      "post": {
+      "get": {
         "tags": [
-          "Batch Emails"
+          "Job"
         ],
-        "description": "Check the status of your request",
+        "description": "Check status of your request",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful",
@@ -157,12 +167,6 @@
             "$ref": "#/components/responses/HttpErrorResponse"
           },
           "404": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "422": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "429": {
             "$ref": "#/components/responses/HttpErrorResponse"
           },
           "500": {
@@ -219,7 +223,7 @@
       }
     },
     "/verify/batch/download": {
-      "post": {
+      "get": {
         "tags": [
           "Batch Emails"
         ],
@@ -669,8 +673,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "required": true,
-            "type": "boolean"
+            "type": "string"
           }
         }
       },
@@ -681,7 +684,6 @@
         "type": "object",
         "properties": {
           "id": {
-            "required": true,
             "type": "boolean"
           }
         }
