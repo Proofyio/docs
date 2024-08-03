@@ -29,6 +29,10 @@
     {
       "name": "API Reference",
       "url": "api-reference"
+    },
+    {
+      "name": "JS Widget",
+      "url": "widget"
     }
   ],
   "anchors": [],
@@ -37,8 +41,14 @@
       "group": "Welcome to Proofy",
       "pages": [
         "getting-started",
-        "widget-configuration",
-        "terminology"
+        "terminology",
+        "widget-configuration"
+      ]
+    },
+    {
+      "group": "Configuration widget",
+      "pages": [
+        "widget/widget-configuration"
       ]
     },
     {
