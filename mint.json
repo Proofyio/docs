@@ -21,7 +21,7 @@
   "topbarLinks": [
     {
       "name": "Log in",
-      "url": "https://verifier-dev.famb.io/v1"
+      "url": "https://verifier-dev.famb.io/"
     }
   ],
   "topbarCtaButton": {

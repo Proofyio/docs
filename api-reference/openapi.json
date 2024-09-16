@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://admin-be.famb.io"
+      "url": "https://admin-be.famb.io/v1"
     }
   ],
   "security": [
