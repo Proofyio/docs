@@ -7,13 +7,16 @@
   },
   "favicon": "/favicon1.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#5DD38C",
+    "light": "#5DD38C",
+    "dark": "#5DD38C",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#5DD38C",
+      "to": "#5DD38C"
     }
+  },
+  "background": {
+    "style": "gradient"
   },
   "topbarLinks": [
     {
@@ -75,6 +78,7 @@
     {
       "group": "File",
       "pages": [
+        "api-reference/endpoint/verify-file-upload",
         "api-reference/endpoint/verify-file-create",
         "api-reference/endpoint/verify-file-status",
         "api-reference/endpoint/verify-file-cancel",

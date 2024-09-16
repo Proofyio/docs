@@ -1,6 +1,6 @@
 ---
 title: 'Download file'
-openapi: 'GET /verify/file/download'
+openapi: 'GET /verify/file/{id}/download'
 ---
 
-This endpoint returns an application/octet stream containing the job data as a CSV file. Several options are available to filter the information by status for download. The only required parameters for this endpoint are the API key and the file ID of the file to be uploaded.
+This endpoint returns a link to a file containing the verification result data in CSV format. The only required parameters for this endpoint are the API key and the file ID of the file to be uploaded.

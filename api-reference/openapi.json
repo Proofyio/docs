@@ -7,11 +7,11 @@
     "contact": {
       "email": "support@proofy.io"
     },
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "servers": [
     {
-      "url": "https://api.proofy.io/v1"
+      "url": "https://admin-be.famb.io"
     }
   ],
   "security": [
@@ -25,24 +25,51 @@
       "description": "Everything about JS Widget"
     },
     {
-      "name": "Job",
-      "description": "Everything about Jobs"
-    },
-    {
       "name": "Single Email",
       "description": "Single email check"
     },
     {
       "name": "Batch Emails",
       "description": "Batch emails check"
+    },
+    {
+      "name": "File upload",
+      "description": "Upload a file containing emails"
     }
   ],
   "paths": {
+    "/credits": {
+      "get": {
+        "description": "Check credits left on account",
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "credits": { "type": "string" }
+                  }
+                },
+                "example": {
+                  "credits": "1000"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
+          "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
+          "422": { "$ref": "#/components/responses/HttpErrorResponse422" },
+          "429": { "$ref": "#/components/responses/HttpErrorResponse429" },
+          "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
+        }
+      }
+    },
     "/verify/single": {
       "get": {
-        "tags": [
-          "Single Email"
-        ],
+        "tags": ["Single Email"],
         "description": "Verify a single email address",
         "parameters": [
           {
@@ -65,38 +92,28 @@
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "401": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "404": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "422": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "429": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "500": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          }
+          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
+          "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
+          "422": { "$ref": "#/components/responses/HttpErrorResponse422" },
+          "429": { "$ref": "#/components/responses/HttpErrorResponse429" },
+          "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
         }
       }
     },
     "/verify/batch/create": {
       "post": {
-        "tags": [
-          "Batch Emails"
-        ],
+        "tags": ["Batch Emails"],
         "description": "Verify a batch email addresses",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BatchRequest"
+                "$ref": "#/components/schemas/BatchCreateRequest"
+              },
+              "example": {
+                "emails": ["test@example.com", "hello@domain.com"]
               }
             }
           }
@@ -107,42 +124,27 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchResponse"
+                  "$ref": "#/components/schemas/CreateResponse"
                 }
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "401": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "404": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "422": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "429": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "500": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          }
+          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
+          "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
+          "422": { "$ref": "#/components/responses/HttpErrorResponse422" },
+          "429": { "$ref": "#/components/responses/HttpErrorResponse429" },
+          "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
         }
       }
     },
-    "/verify/batch/status": {
+    "/verify/batch/{id}": {
       "get": {
-        "tags": [
-          "Job"
-        ],
-        "description": "Check status of your request",
+        "description": "Get validation results status",
         "parameters": [
           {
-            "name": "job_id",
-            "in": "query",
+            "name": "id",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -155,141 +157,119 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchStatusResponse"
+                  "$ref": "#/components/schemas/StatusResponse"
+                },
+                "example": {
+                  "status": "complete",
+                  "total": {
+                      "records": 1000,
+                      "bad_syntax": 2,
+                      "duplicates": 50,
+                      "billable": 948,
+                      "processed": 948
+                    }
                 }
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "401": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "404": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "500": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          }
+          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
+          "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
+          "422": { "$ref": "#/components/responses/HttpErrorResponse422" },
+          "429": { "$ref": "#/components/responses/HttpErrorResponse429" },
+          "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
         }
-      }
-    },
-    "/verify/batch/cancel": {
-      "post": {
-        "tags": [
-          "Batch Emails"
-        ],
-        "description": "Cancel a request of batch",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BatchCancelRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchCancelResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "401": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "404": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "422": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "429": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "500": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          }
-        }
-      }
-    },
-    "/verify/batch/download": {
-      "get": {
-        "tags": [
-          "Batch Emails"
-        ],
+      },
+      "delete": {
+        "tags": ["Batch emails"],
+        "description": "Cancel and delete batch",
         "parameters": [
           {
-            "name": "job_id",
-            "in": "query",
+            "in": "path",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "download",
-            "in": "query",
-            "required": false,
-            "description": "download emails by status, possible values: all, deliverable, risky, undeliverable, unknown",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
-        "description": "Download the batch results as JSON",
         "responses": {
           "200": {
             "description": "Successful",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchStatusResponse"
+                  "$ref": "#/components/schemas/DeleteResponse"
+                },
+                "example": {
+                  "message": "Batch successfully deleted"
                 }
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "401": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "404": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "422": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "429": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "500": {
-            "$ref": "#/components/responses/HttpErrorResponse"
+          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
+          "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
+          "422": { "$ref": "#/components/responses/HttpErrorResponse422" },
+          "429": { "$ref": "#/components/responses/HttpErrorResponse429" },
+          "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
+        }
+      }
+    },
+    "/verify/batch/{id}/download": {
+      "get": {
+        "tags": ["Batch emails"],
+        "description": "Get validation results from batch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchDownloadResponse"
+                },
+                "example": {
+                  "status": "ready",
+                  "total": 30,
+                  "page": "100",
+                  "list": []
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
+          "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
+          "422": { "$ref": "#/components/responses/HttpErrorResponse422" },
+          "429": { "$ref": "#/components/responses/HttpErrorResponse429" },
+          "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
         }
       }
     },
     "/verify/file/create": {
       "post": {
-        "tags": [
-          "Job"
-        ],
-        "description": "Create validation file",
+        "tags": ["Upload file from URL"],
+        "description": "Upload file with emails for verification",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/JobCreateRequest"
+                "$ref": "#/components/schemas/FileCreateRequest"
+              },
+              "example": {
+                "file_url": "http://example.com/full/path/to/file.csv",
+                "file_name": "Your file name.csv"
               }
             }
           }
@@ -300,79 +280,27 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/JobCreateResponse"
+                  "$ref": "#/components/schemas/CreateFileResponse"
                 }
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "401": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "404": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "500": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          }
+          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
+          "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
+          "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
         }
       }
     },
-    "/verify/file/status": {
-      "get": {
-        "tags": [
-          "Job"
-        ],
-        "description": "Check validation file status",
-        "parameters": [
-          {
-            "name": "job_id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JobStatusResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "401": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "404": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "500": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          }
-        }
-      }
-    },
-    "/verify/file/cancel": {
+    "/verify/file/upload": {
       "post": {
-        "tags": [
-          "Job"
-        ],
-        "description": "Delete file",
+        "tags": ["Upload file"],
+        "description": "Upload file with emails for verification",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/JobCancelRequest"
+                "$ref": "#/components/schemas/FileUploadRequest"
               }
             }
           }
@@ -383,52 +311,27 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/JobCancelResponse"
+                  "$ref": "#/components/schemas/CreateResponse"
                 }
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "401": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "404": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "422": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "429": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "500": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          }
+          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
+          "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
+          "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
         }
       }
     },
-    "/verify/file/download": {
+    "/verify/file/{id}": {
       "get": {
-        "tags": [
-          "Job"
-        ],
-        "description": "Download validation file result",
+        "tags": ["File"],
+        "description": "File Verification Status",
         "parameters": [
           {
-            "name": "job_id",
-            "in": "query",
+            "in": "path",
+            "name": "id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "download",
-            "in": "query",
-            "required": false,
-            "description": "download file with emails by status, possible values: all, deliverable, risky, undeliverable, unknown",
             "schema": {
               "type": "string"
             }
@@ -440,91 +343,137 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/JobDownloadResponse"
+                  "$ref": "#/components/schemas/StatusResponse"
+                },
+                "example": {
+                  "status": "complete",
+                  "total": {
+                    "records": 1000,
+                    "bad_syntax": 2,
+                    "duplicates": 50,
+                    "billable": 948,
+                    "processed": 948
+                  }
                 }
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "401": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "404": {
-            "$ref": "#/components/responses/HttpErrorResponse"
-          },
-          "500": {
-            "$ref": "#/components/responses/HttpErrorResponse"
+          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
+          "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
+          "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
+        }
+      },
+      "delete": {
+        "tags": ["File"],
+        "description": "Cancel and delete file verification",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                },
+                "example": {
+                  "message": "File successfully deleted"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
+          "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
+          "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
+        }
+      }
+    },
+    "/verify/file/{id}/download": {
+      "get": {
+        "tags": ["File"],
+        "description": "Get download link for file with results",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileDownloadResponse"
+                },
+                "example": {
+                  "status": "ready",
+                  "url": "https://data-exchange-dev-verifier.s3.amazonaws.com/bulks/exports/9f13c66c-51b5-4f28-8470-606a1d4bf099.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYJMSIKZRYBTA5MPB%2F20240804%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240804T135925Z&X-Amz-Expires=6000&X-Amz-Signature=6336b64a6d33034fc17a930d001f8306a1c9481932f2a262a58e3ddc5c1ce513&X-Amz-SignedHeaders=host"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
+          "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
+          "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
         }
       }
     }
   },
   "components": {
     "schemas": {
-      "BatchCreateRequest": {
+      "SingleCheckResponse": {
         "type": "object",
         "properties": {
-          "emails": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "BatchCreateResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string"
-          },
-          "job_id": {
-            "type": "string"
-          }
-        }
-      },
-      "BatchStatusResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string"
-          },
-          "total": {
+          "result": {
             "type": "object",
             "properties": {
-              "records": {
-                "type": "number"
+              "syntax": { "type": "object" },
+              "free": { "type": "boolean" },
+              "roleAccount": { "type": "boolean" },
+              "disposable": { "type": "boolean" },
+              "mx": {
+                "type": "object",
+                "properties": {
+                  "records": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "acceptsMail": { "type": "boolean" }
+                }
               },
-              "bad_syntax": {
-                "type": "number"
+              "deliverability": {
+                "type": "object",
+                "properties": {
+                  "canConnect": { "type": "boolean" },
+                  "fullInbox": { "type": "boolean" },
+                  "catchAll": { "type": "boolean" },
+                  "deliverable": { "type": "boolean" },
+                  "disabled": { "type": "boolean" }
+                }
               },
-              "duplicates": {
-                "type": "number"
-              },
-              "billable": {
-                "type": "number"
-              },
-              "processed": {
-                "type": "number"
-              }
+              "reachable": { "type": "string" }
             }
-          }
+          },
+          "credits": { "type": "number" }
         }
       },
-      "BatchDownloadResponse": {
-        "type": "object",
-        "properties": {
-          "emails": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "JobCreateRequest": {
+      "FileCreateRequest": {
         "type": "object",
         "properties": {
           "file_url": {
@@ -535,212 +484,231 @@
           }
         }
       },
-      "JobCreateResponse": {
+      "FileUploadRequest": {
         "type": "object",
         "properties": {
-          "status": {
-            "type": "string"
-          },
-          "job_id": {
-            "type": "string"
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "The format is of type binary"
           }
         }
       },
-      "JobStatusResponse": {
+      "FileDownloadResponse": {
         "type": "object",
         "properties": {
-          "status": {
-            "type": "string"
-          },
+          "status": { "type": "string" },
+          "url": { "type": "string" }
+        }
+      },
+      "BatchCreateRequest": {
+        "type": "object",
+        "properties": {
+          "emails": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "BatchDownloadResponse": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string" },
+          "total": { "type": "number" },
+          "page": { "type": "number" },
+          "list": { "type": "array" }
+        }
+      },
+      "StatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string" },
           "total": {
             "type": "object",
             "properties": {
-              "records": {
-                "type": "number"
-              },
-              "bad_syntax": {
-                "type": "number"
-              },
-              "duplicates": {
-                "type": "number"
-              },
-              "billable": {
-                "type": "number"
-              },
-              "processed": {
-                "type": "number"
-              }
+              "records": { "type": "number" },
+              "bad_syntax": { "type": "number" },
+              "duplicates": { "type": "number" },
+              "billable": { "type": "number" },
+              "processed": { "type": "number" }
             }
           }
         }
       },
-      "JobDownloadResponse": {
+      "DeleteResponse": {
         "type": "object",
         "properties": {
-          "status": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          }
+          "message": { "type": "string" }
         }
       },
-      "SingleCheckResponse": {
+      "CreateResponse": {
         "type": "object",
         "properties": {
-          "result": {
-            "type": "object",
-            "properties": {
-              "syntax": {
-                "type": "object"
-              },
-              "free": {
-                "type": "boolean"
-              },
-              "roleAccount": {
-                "type": "boolean"
-              },
-              "disposable": {
-                "type": "boolean"
-              },
-              "mx": {
-                "type": "object",
-                "properties": {
-                  "records": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "acceptsMail": {
-                    "type": "boolean"
-                  }
-                }
-              },
-              "deliverability": {
-                "type": "object",
-                "properties": {
-                  "canConnect": {
-                    "type": "boolean"
-                  },
-                  "fullInbox": {
-                    "type": "boolean"
-                  },
-                  "catchAll": {
-                    "type": "boolean"
-                  },
-                  "deliverable": {
-                    "type": "boolean"
-                  },
-                  "disabled": {
-                    "type": "boolean"
-                  }
-                }
-              },
-              "reachable": {
-                "type": "string"
-              }
-            }
-          },
-          "credits": {
-            "type": "number"
-          }
+          "status": { "type": "string" },
+          "id": { "type": "string" }
+        },
+        "example": {
+          "status": "parsing",
+          "id": "e29bec0d-c534-493d-9c86-f44b0e2c2617"
         }
       },
-      "BatchRequest": {
+      "CreateFileResponse": {
         "type": "object",
         "properties": {
-          "emails": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
+          "status": { "type": "string" },
+          "id": { "type": "string" }
+        },
+        "example": {
+          "status": "parsing",
+          "id": "9b034ae4-9d28-4c5b-9cca-1b3871a9adc1"
         }
-      },
-      "BatchResponse": {
-        "type": "object",
-        "properties": {
-          "emails": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "BatchCancelRequest": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          }
-        }
-      },
-      "BatchCancelResponse": {
-        "type": "object"
-      },
-      "JobCancelRequest": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "boolean"
-          }
-        }
-      },
-      "JobCancelResponse": {
-        "type": "object"
       },
       "UnauthorizedResponse": {
-        "type": "object",
         "properties": {
-          "message": {
-            "type": "string"
-          }
+          "message": { "type": "string" }
         }
       },
       "BadRequestResponse": {
-        "type": "object",
         "properties": {
-          "message": {
-            "type": "string"
-          }
+          "message": { "type": "string" }
         }
       },
       "RateLimitErrorResponse": {
-        "type": "object",
         "properties": {
-          "message": {
-            "type": "string"
-          }
+          "message": { "type": "string" }
         }
       },
       "ValidationErrorResponse": {
-        "type": "object",
         "properties": {
-          "message": {
-            "type": "string"
-          }
+          "message": { "type": "string" }
         }
       },
       "InternalServerErrorResponse": {
-        "type": "object",
         "properties": {
-          "message": {
-            "type": "string"
-          }
+          "message": { "type": "string" }
         }
       },
       "NotFoundResponse": {
-        "type": "object",
         "properties": {
-          "message": {
-            "type": "string"
-          }
+          "message": { "type": "string" }
         }
       }
     },
     "responses": {
+      "HttpErrorResponse400": {
+        "description": "Http Error Response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Error message"
+                }
+              }
+            },
+            "example": {
+              "message": "Bad Request"
+            }
+          }
+        }
+      },
+      "HttpErrorResponse401": {
+        "description": "Http Error Response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Error message"
+                }
+              }
+            },
+            "example": {
+              "message": "Unauthorized"
+            }
+          }
+        }
+      },
+      "HttpErrorResponse404": {
+        "description": "Http Error Response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Error message"
+                }
+              }
+            },
+            "example": {
+              "message": "Not Found"
+            }
+          }
+        }
+      },
+      "HttpErrorResponse422": {
+        "description": "Http Error Response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Error message"
+                }
+              }
+            },
+            "example": {
+              "message": "Unprocessable Entity"
+            }
+          }
+        }
+      },
+      "HttpErrorResponse429": {
+        "description": "Http Error Response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Error message"
+                }
+              }
+            },
+            "example": {
+              "message": "Too Many Requests"
+            }
+          }
+        }
+      },
+      "HttpErrorResponse500": {
+        "description": "Http Error Response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Error message"
+                }
+              }
+            },
+            "example": {
+              "message": "Internal Server Error"
+            }
+          }
+        }
+      },
       "HttpErrorResponse": {
         "description": "Http Error Response",
         "content": {
