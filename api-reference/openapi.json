@@ -258,7 +258,7 @@
     },
     "/verify/file/create": {
       "post": {
-        "tags": ["Upload file from URL"],
+        "tags": ["Upload file"],
         "description": "Upload file with emails for verification",
         "requestBody": {
           "required": true,
@@ -294,11 +294,11 @@
     },
     "/verify/file/upload": {
       "post": {
-        "tags": ["Upload file"],
+        "tags": ["Upload file from URL"],
         "description": "Upload file with emails for verification",
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "$ref": "#/components/schemas/FileUploadRequest"
               }
@@ -490,7 +490,7 @@
           "file": {
             "type": "string",
             "format": "binary",
-            "description": "The format is of type binary"
+            "description": "File to upload. The format is of type binary"
           }
         }
       },
