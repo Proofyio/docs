@@ -4,14 +4,12 @@ description: 'Verifies one or multiple emails in a batch'
 openapi: 'POST /verify/batch/create'
 ---
 
-If you need to verify multiple email addresses at once, you can use our Batch Email Verification API.
+Use to verify multiple email databases by sending a single request for efficient batch processing.
 
-Proofy's distributed infrastructure ensures optimal results and will retry any verifications if necessary.
+### Batch size
 
-Submit an array of email addresses, optionally including names.
+Single batch can process up to 10,000 emails.
 
-The response data will include the names provided, which can also be used to pass your internal ID.
+### Rate Limit
 
-### Batch size recommendation
-
-Single batch can process up to 50,000 emails. Minimum number of emails 30.
+The Batch Email Verification API is limited to 25 requests per minute and 2 concurrent batch tasks per account. Other batch tasks will be queued.

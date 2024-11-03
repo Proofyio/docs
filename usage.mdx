@@ -1,0 +1,35 @@
+---
+title: 'Usage Guidelines'
+description: ''
+---
+
+<Warning>
+    API keys are sensitive and grant access to your account data and email verification services.
+    Share them only with trusted sources to safeguard your account. If your key is compromised, [reset](https://my.proofy.io/apps) it in the Proofy admin panel.
+</Warning>
+
+Our API supports both single and bulk verification requests.
+It's important to understand when to use each option and their limits to ensure accuracy and efficiency.
+
+- **Single** (including JS Widget) -  Should be used for actions like registration, contact and submission forms.
+Do not use it to verify emails in lists or databases one by one, as this will result in account suspension.
+Use file or batch verification for such tasks.
+
+- **Batch** - Use to verify multiple email databases by sending a single request for efficient batch processing.
+
+- **File** - Use to verify multiple email databases and big files.
+Submit all data in a single task for efficient processing and proper deduplication, rather than splitting it into smaller tasks.
+
+- **Webhook** - You can use the verify/single endpoint as a webhook by appending properties as query strings to the URI.
+This allows easy integration with CRMs and other tools without extensive programming. To use it, replace the {email} placeholder with the email to verify.
+
+
+### Rate Limits
+##
+
+
+| Endpoint                               | Description           |
+| :------------------------------------  | :-------------------: |
+| /verify/single &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  | 1000 per minute                        |
+| /verify/batch                          | 25 per minute         |
+| /verify/file                           | 25 per minute         |

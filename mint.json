@@ -44,8 +44,8 @@
       "group": "Welcome to Proofy",
       "pages": [
         "getting-started",
-        "terminology",
-        "widget-configuration"
+        "usage",
+        "terminology"
       ]
     },
     {
