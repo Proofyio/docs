@@ -61,7 +61,7 @@
       ]
     },
     {
-      "group": "Real Time",
+      "group": "Single",
       "pages": [
         "api-reference/endpoint/verify-single"
       ]

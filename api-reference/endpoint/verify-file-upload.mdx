@@ -4,4 +4,13 @@ description: 'Verifies one or multiple emails in a file'
 openapi: 'POST /verify/file/upload'
 ---
 
-The file creation endpoint enables you to verify multiple emails simultaneously. This endpoint will create a job and process the emails in the list asynchronously. Verification results will not be included in the response.
+The file creation endpoint allows you to verify multiple emails at once by creating a task to process the file asynchronously.
+Verification results are not included in the response.
+
+### File upload recommendation
+
+For efficiency and deduplication, submit data in a single task rather than splitting it.
+For example, submit one file with 50k emails instead of 10 files of 5k each. If using data from a CRM, buffer it locally before submission.
+
+### Size limiting
+The Bulk API supports files up to 65 MB.

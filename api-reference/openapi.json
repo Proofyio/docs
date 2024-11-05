@@ -70,7 +70,6 @@
     "/verify/single": {
       "get": {
         "tags": ["Single Email"],
-        "description": "Verify a single email address",
         "parameters": [
           {
             "name": "email",
