@@ -87,6 +87,36 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SingleCheckResponse"
+                },
+                "example": {
+                  "status": "valid",
+                  "syntax": {
+                    "username": "team",
+                    "domain": "proofy.io",
+                    "valid": true
+                  },
+                  "free": false,
+                  "roleAccount": true,
+                  "roleNoReply": false,
+                  "disposable": false,
+                  "possibleSpamTrap": false,
+                  "mx": {
+                    "records": [
+                      "aspmx.l.google.com.",
+                      "alt2.aspmx.l.google.com.",
+                      "alt1.aspmx.l.google.com.",
+                      "alt4.aspmx.l.google.com.",
+                      "alt3.aspmx.l.google.com."
+                    ],
+                    "acceptsMail": true
+                  },
+                  "deliverability": {
+                    "canConnect": true,
+                    "fullInbox": false,
+                    "catchAll": false,
+                    "deliverable": true,
+                    "disabled": false
+                  }
                 }
               }
             }
@@ -239,9 +269,58 @@
                 },
                 "example": {
                   "status": "ready",
-                  "total": 30,
-                  "page": "100",
-                  "list": []
+                  "total": 2,
+                  "page": 1,
+                  "list": [
+                    {
+                      "status": "valid",
+                      "syntax": {
+                        "username": "support",
+                        "domain": "proofy.io",
+                        "valid": true
+                      },
+                      "free": false,
+                      "roleAccount": true,
+                      "roleNoReply": false,
+                      "disposable": false,
+                      "possibleSpamTrap": false,
+                      "mx": {
+                        "hasRecords": true,
+                        "acceptsMail": true
+                      },
+                      "deliverability": {
+                        "canConnect": true,
+                        "fullInbox": false,
+                        "catchAll": false,
+                        "deliverable": true,
+                        "disabled": false
+                      }
+                    },
+                    {
+                      "status": "valid",
+                      "syntax": {
+                        "username": "team",
+                        "domain": "proofy.io",
+                        "valid": true
+                      },
+                      "free": false,
+                      "roleAccount": true,
+                      "roleNoReply": false,
+                      "disposable": false,
+                      "possibleSpamTrap": false,
+                      "mx": {
+                        "hasRecords": true,
+                        "acceptsMail": true
+                      },
+                      "deliverability": {
+                        "canConnect": true,
+                        "fullInbox": false,
+                        "catchAll": false,
+                        "deliverable": true,
+                        "disabled": false
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -442,6 +521,7 @@
           "result": {
             "type": "object",
             "properties": {
+              "status": { "type": "string" },
               "syntax": { "type": "object" },
               "free": { "type": "boolean" },
               "roleAccount": { "type": "boolean" },
@@ -465,8 +545,7 @@
                   "deliverable": { "type": "boolean" },
                   "disabled": { "type": "boolean" }
                 }
-              },
-              "reachable": { "type": "string" }
+              }
             }
           },
           "credits": { "type": "number" }

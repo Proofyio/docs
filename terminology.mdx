@@ -5,41 +5,38 @@ description: ''
 
 ```json
 {
-  "result": {
-    "syntax": {
-      "username": "team",
-      "domain": "proofy.io",
-      "valid": true
-    },
-    "free": false,
-    "roleAccount": true,
-    "roleNoReply": false,
-    "disposable": false,
-    "possibleSpamTrap": false,
-    "mx": {
-      "records": [
-        "aspmx.l.google.com.",
-        "alt1.aspmx.l.google.com.",
-        "alt2.aspmx.l.google.com.",
-        "alt3.aspmx.l.google.com.",
-        "alt4.aspmx.l.google.com."
-      ],
-      "acceptsMail": true
-    },
-    "deliverability": {
-      "canConnect": true,
-      "fullInbox": false,
-      "catchAll": false,
-      "deliverable": true,
-      "disabled": false
-    },
-    "reachable": "valid"
+  "status": "valid",
+  "syntax": {
+    "username": "team",
+    "domain": "proofy.io",
+    "valid": true
   },
-  "credits": 8073245
+  "free": false,
+  "roleAccount": true,
+  "roleNoReply": false,
+  "disposable": false,
+  "possibleSpamTrap": false,
+  "mx": {
+    "records": [
+      "aspmx.l.google.com.",
+      "alt1.aspmx.l.google.com.",
+      "alt2.aspmx.l.google.com.",
+      "alt3.aspmx.l.google.com.",
+      "alt4.aspmx.l.google.com."
+    ],
+    "acceptsMail": true
+  },
+  "deliverability": {
+    "canConnect": true,
+    "fullInbox": false,
+    "catchAll": false,
+    "deliverable": true,
+    "disabled": false
+  }
 }
 ```
 
-## reachable (Statuses)
+## status
 
 - `valid`:  The recipient’s mail server has confirmed that the email address is valid and safe to send to.
 - `invalid`: The email address is either incorrect or does not exist, meaning it cannot receive mail.
@@ -58,7 +55,7 @@ description: ''
  Checks if the email address has valid syntax.
 
 ## free
-Identifies domains that accept all emails
+Identifies if the email address is from a free provider (e.g., Gmail).
 
 ## roleAccount
 
@@ -98,29 +95,7 @@ Indicates if the address is deliverable.
 ### disabled
 Marks addresses that are disabled.
 
-## unknown
-The email status could not be determined due to a timeout or an unexpected error.
-
-
-# Sub statuses
-
-Valid: The email address was reachable, accepted, and passed all verification checks.
-
-Invalid
-- `Bad syntax`: The email format is incorrect (invalid syntax).
-- `No MX`: No MX record found, indicating emails cannot be delivered to this address.
-- `SMTP can’t connect`: Unable to connect to the email's SMTP server.
-- `SMTP not deliverable`: The email is undeliverable via the SMTP protocol.
-- `Disabled`: The email is disabled, and an email is not accepted.
-
-Risky
-- `Disposable`: A temporary email, often used for one-time purposes.
-- `Catch-all`: The domain accepts all emails, increasing undeliverability risk.
-- `Full inbox`: The inbox is full, which may prevent new emails.
-- `Role no-reply`: A role-based email (e.g., no-reply), usually not intended for replies.
-- `Possible spam trap`: A potential spam trap, which could harm deliverability and sender reputation.
-
-Unknown
-- `Unknown`: The email status could not be determined due to a timeout or an unexpected error.
+{/* ## unknown
+The email status could not be determined due to a timeout or an unexpected error. */}
 
 
