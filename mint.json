@@ -21,12 +21,12 @@
   "topbarLinks": [
     {
       "name": "Log in",
-      "url": "https://verifier-dev.famb.io/"
+      "url": "https://my.proofy.io/"
     }
   ],
   "topbarCtaButton": {
     "name": "Sign Up",
-    "url": "https://verifier-dev.famb.io/signup"
+    "url": "https://my.proofy.io/signup"
   },
   "tabs": [
     {
