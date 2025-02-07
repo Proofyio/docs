@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://apis.proofy.io"
+      "url": "https://apis.proofy.io/v1"
     }
   ],
   "security": [
