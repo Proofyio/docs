@@ -269,8 +269,6 @@
                 },
                 "example": {
                   "status": "ready",
-                  "total": 2,
-                  "page": 1,
                   "list": [
                     {
                       "status": "valid",
@@ -592,8 +590,6 @@
         "type": "object",
         "properties": {
           "status": { "type": "string" },
-          "total": { "type": "number" },
-          "page": { "type": "number" },
           "list": { "type": "array" }
         }
       },
