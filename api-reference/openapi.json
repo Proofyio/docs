@@ -121,7 +121,7 @@
               }
             }
           },
-          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "400": { "$ref": "#/components/responses/HttpErrorResponseNotEnoughCredits400" },
           "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
           "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
           "422": { "$ref": "#/components/responses/HttpErrorResponse422" },
@@ -158,7 +158,7 @@
               }
             }
           },
-          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "400": { "$ref": "#/components/responses/HttpErrorResponseNotEnoughCredits400" },
           "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
           "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
           "422": { "$ref": "#/components/responses/HttpErrorResponse422" },
@@ -361,7 +361,7 @@
               }
             }
           },
-          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "400": { "$ref": "#/components/responses/HttpErrorResponseNotEnoughCredits400" },
           "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
           "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
           "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
@@ -392,7 +392,7 @@
               }
             }
           },
-          "400": { "$ref": "#/components/responses/HttpErrorResponse400" },
+          "400": { "$ref": "#/components/responses/HttpErrorResponseNotEnoughCredits400" },
           "401": { "$ref": "#/components/responses/HttpErrorResponse401" },
           "404": { "$ref": "#/components/responses/HttpErrorResponse404" },
           "500": { "$ref": "#/components/responses/HttpErrorResponse500" }
@@ -684,6 +684,25 @@
             },
             "example": {
               "message": "Bad Request"
+            }
+          }
+        }
+      },
+      "HttpErrorResponseNotEnoughCredits400": {
+        "description": "Http Error Response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Error message"
+                }
+              }
+            },
+            "example": {
+              "message": "Not enough credits"
             }
           }
         }
